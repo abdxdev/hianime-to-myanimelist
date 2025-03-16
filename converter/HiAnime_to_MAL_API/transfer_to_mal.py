@@ -60,25 +60,32 @@ def transfer_to_mal(hi_list: list[dict], prev_list: list[dict], user_headers: di
     error_list = []
 
     if prev_list is None:
-        print("Getting previous list")
+        # print("Getting previous list")
         prev_list = get_prev_list(user_headers)
         request.session["prev_list"] = prev_list
 
     for anime in hi_list:
-        print(anime)
+        # print(anime)
         try:
             entry = Cache.objects.filter(title=anime["title"])
             if entry.exists():
                 anime_id = entry.first().anime_id
+                if not anime_id:
+                    print("Anime not found on MAL. Title: ", anime["title"])
             else:
                 anime_id = get_mal_id(anime["title"], client_headers)
-                Cache.objects.create(anime_id=anime_id, title=anime["title"])
+                if not anime_id:
+                    print("Anime not found on MAL. Title: ", anime["title"])
+                    error_list.append({"title": anime["title"], "reason": "Anime not found on MAL"})
+                else:
+                    Cache.objects.create(anime_id=anime_id, title=anime["title"])
             if not anime_id:
+                print("Anime not found on MAL. Title: ", anime["title"])
                 error_list.append({"title": anime["title"], "reason": "Anime not found on MAL"})
                 continue
             for prev_anime in prev_list:
                 if prev_anime["id"] == anime_id and prev_anime["status"] == anime["status"]:
-                    print("Anime already in MAL")
+                    # print("Anime already in MAL")
                     error_list.append({"title": anime["title"], "reason": "Anime already in MAL"})
                     break
             else:
