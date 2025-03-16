@@ -12,6 +12,7 @@ statuses = {
     "completed": 5,
 }
 
+
 def get_n_pages(cookies):
     with requests.Session() as s:
         hi_n_pages: dict = {}

@@ -1,6 +1,7 @@
 import requests
 from ..models import Cache
 
+
 def get_mal_id(title: str, headers: dict) -> int:
     """
     Get MAL ID of anime
@@ -12,6 +13,7 @@ def get_mal_id(title: str, headers: dict) -> int:
     body = {"q": title, "limit": 1}
     anime = requests.get("https://api.myanimelist.net/v2/anime", headers=headers, params=body).json().get("data")
     if not anime:
+        print(f"Anime {title} not found on MAL")
         return None
     return anime[0]["node"]["id"]
 
@@ -63,7 +65,6 @@ def transfer_to_mal(hi_list: list[dict], prev_list: list[dict], user_headers: di
         prev_list = get_prev_list(user_headers)
         request.session["prev_list"] = prev_list
 
-
     for anime in hi_list:
         print(anime)
         try:
@@ -86,4 +87,3 @@ def transfer_to_mal(hi_list: list[dict], prev_list: list[dict], user_headers: di
         except Exception as e:
             error_list.append({"title": anime["title"], "reason": str(e)})
     return error_list
-
