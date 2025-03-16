@@ -13,7 +13,6 @@ def get_mal_id(title: str, headers: dict) -> int:
     body = {"q": title, "limit": 1}
     anime = requests.get("https://api.myanimelist.net/v2/anime", headers=headers, params=body).json().get("data")
     if not anime:
-        print(f"Anime {title} not found on MAL")
         return None
     return anime[0]["node"]["id"]
 
