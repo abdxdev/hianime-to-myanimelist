@@ -17,7 +17,7 @@ This project provides a web interface to automate the transfer of anime lists fr
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/abdbbdii/hianime-to-myanimelist.git
+   git clone https://github.com/abdxdev/hianime-to-myanimelist.git
    cd hianime-to-myanimelist
    ```
 
