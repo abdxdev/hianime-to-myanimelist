@@ -1,3 +1,7 @@
+> [!NOTE]
+> 
+> With Hianime's shutdown, this project has become obsolete. It had a longstanding reliability issue with transfers that I never got around to fixing — and now, there's no longer any reason to.
+
 # HiAnime to MyAnimeList Transfer Tool
 
 This project provides a web interface to automate the transfer of anime lists from HiAnime.to to MyAnimeList.net. The tool helps users connect their MyAnimeList.net account and import their anime list from HiAnime.to with just a few clicks.
